@@ -15,22 +15,26 @@ class IbLiquidSyntax extends md.BlockSyntax {
     if (tags[0] == 'include') {
       // chapter_toc include
       if (tags[1] == 'chapter_toc.html') {
-        node = md.Element.text('chapter_contents', '');
+        node = md.Element('chapter_contents', []);
       } else if (tags[1] == 'image.html' && tags.length >= 3) {
         // Images
-        var url =
-            RegExp(r'''url=("|')([^"'\n\r]+)("|')''').firstMatch(match[1]!)![2];
-        var alt =
-            RegExp(
-              r'''description=("|')([^"'\n\r]*)("|')''',
-            ).firstMatch(match[1]!)![2];
+        var urlMatch = RegExp(
+          r'''url=("|')([^"'\n\r]+)("|')''',
+        ).firstMatch(match[1]!);
+        var altMatch = RegExp(
+          r'''description=("|')([^"'\n\r]*)("|')''',
+        ).firstMatch(match[1]!);
+
+        var url = urlMatch != null ? urlMatch[2] : '';
+        var alt = altMatch != null ? altMatch[2] : '';
 
         node = md.Element.withTag('img');
         node.attributes['src'] = '${EnvironmentConfig.IB_BASE_URL}$url';
-        node.attributes['alt'] = alt!;
+        node.attributes['alt'] = alt ?? '';
       } else {
         // Interactions using html
-        node = md.Element.text('interaction', tags[1]);
+        node = md.Element('interaction', []);
+        node.attributes['id'] = tags[1];
       }
     }
 

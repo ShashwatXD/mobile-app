@@ -14,8 +14,9 @@ class IbInlineHtmlSyntax extends md.InlineSyntax {
         match[2] != null &&
         builders.containsKey(match[1]?.trim())) {
       parser.addNode(md.Element.text(match[1]!.trim(), match[2]!.trim()));
+      return true;
     }
 
-    return true;
+    return false;
   }
 }

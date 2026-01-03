@@ -21,7 +21,9 @@ class IbMdTagSyntax extends md.BlockSyntax {
 
       _tagsStack.remove('.fs-9');
       parser.advance();
-      return md.Element.text('h5', text.content);
+      final element = md.Element('h5', []);
+      element.attributes['content'] = text.content;
+      return element;
     }
 
     // Pop Quizzes
@@ -35,7 +37,9 @@ class IbMdTagSyntax extends md.BlockSyntax {
       } while (parser.next != null || !parser.isDone);
 
       _tagsStack.remove('.quiz');
-      return md.Element.text('quiz', quizContent);
+      final element = md.Element('quiz', []);
+      element.attributes['content'] = quizContent;
+      return element;
     }
 
     parser.advance();

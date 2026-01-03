@@ -18,7 +18,7 @@ class IbHeadingsBuilder extends MarkdownElementBuilder {
 
   @override
   Widget visitElementAfter(md.Element element, TextStyle? preferredStyle) {
-    var text = element.textContent;
+    var text = element.attributes['content'] ?? element.textContent;
 
     var widget =
         selectable

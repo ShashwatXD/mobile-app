@@ -8,7 +8,9 @@ class IbEmbedSyntax extends md.BlockSyntax {
     var text = parser.current;
     parser.advance();
 
-    return md.Element.text('iframe', text.content);
+    final element = md.Element('iframe', []);
+    element.attributes['content'] = text.content;
+    return element;
   }
 
   @override

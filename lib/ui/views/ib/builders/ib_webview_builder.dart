@@ -9,7 +9,7 @@ class IbWebViewBuilder extends MarkdownElementBuilder {
 
   @override
   Widget visitElementAfter(md.Element element, TextStyle? preferredStyle) {
-    var textContent = element.textContent;
+    var textContent = element.attributes['content'] ?? element.textContent;
 
     return Html(
       data: textContent,
