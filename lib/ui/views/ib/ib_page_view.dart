@@ -168,12 +168,12 @@ class _IbPageViewState extends State<IbPageView> {
               AppLocalizations.of(context)!.ib_page_image_load_error,
           loadingImageText: AppLocalizations.of(context)!.ib_page_loading_image,
         ),
-        // 'h1': _headingsBuilder,
-        // 'h2': _headingsBuilder,
-        // 'h3': _headingsBuilder,
-        // 'h4': _headingsBuilder,
-        // 'h5': _headingsBuilder,
-        // 'h6': _headingsBuilder,
+        'h1': _headingsBuilder,
+        'h2': _headingsBuilder,
+        'h3': _headingsBuilder,
+        'h4': _headingsBuilder,
+        'h5': _headingsBuilder,
+        'h6': _headingsBuilder,
         'chapter_contents': IbChapterContentsBuilder(
           chapterContents:
               _model.pageData?.chapterOfContents?.isNotEmpty ?? false
@@ -187,6 +187,7 @@ class _IbPageViewState extends State<IbPageView> {
         'iframe': IbWebViewBuilder(),
         'interaction': IbInteractionBuilder(model: _model),
         'quiz': IbPopQuizBuilder(context: context, model: _model),
+        'empty_block': EmptyBlockBuilder(),
       },
       extensionSet: md.ExtensionSet(
         [
@@ -614,5 +615,12 @@ class CustomImageBuilder extends MarkdownElementBuilder {
         ),
       ),
     );
+  }
+}
+
+class EmptyBlockBuilder extends MarkdownElementBuilder {
+  @override
+  Widget visitElementAfter(md.Element element, TextStyle? preferredStyle) {
+    return const SizedBox.shrink();
   }
 }

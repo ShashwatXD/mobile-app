@@ -39,7 +39,7 @@ class IbMdTagSyntax extends md.BlockSyntax {
     }
 
     parser.advance();
-    return null;
+    return md.Element('p', [md.Element.withTag('empty_block')]);
   }
 
   @override

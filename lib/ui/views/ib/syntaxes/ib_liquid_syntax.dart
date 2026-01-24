@@ -37,7 +37,7 @@ class IbLiquidSyntax extends md.BlockSyntax {
     }
 
     parser.advance();
-    return node;
+    return node ?? md.Element('p', [md.Element.withTag('empty_block')]);
   }
 
   @override

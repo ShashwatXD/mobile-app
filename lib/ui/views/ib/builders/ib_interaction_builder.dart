@@ -37,14 +37,21 @@ class IbInteractionBuilder extends MarkdownElementBuilder {
         controller.setNavigationDelegate(
           NavigationDelegate(
             onPageFinished: (String url) async {
-              final height = double.parse(
-                await controller.runJavaScriptReturningResult(
-                      'document.documentElement.scrollHeight;',
-                    )
-                    as String,
-              );
-              streamController.add(height);
-            },
+                try {
+                  var result = await controller.runJavaScriptReturningResult(
+                    'document.documentElement.scrollHeight;',
+                  );
+                  var heightString = result.toString();
+                  // Remove quotes if present (some Android versions return "123")
+                  if (heightString.startsWith('"') && heightString.endsWith('"')) {
+                    heightString = heightString.substring(1, heightString.length - 1);
+                  }
+                  final height = double.tryParse(heightString) ?? 600.0;
+                  streamController.add(height);
+                } catch (e) {
+                  debugPrint('Error getting height: $e');
+                }
+              },
           ),
         );
 
