@@ -22,26 +22,11 @@ class IbMathjaxBuilder extends MarkdownElementBuilder {
 
     _content = _content.replaceAll(RegExp(r'\\tag{.+}'), ' ');
 
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-            // Intentional Nesting due to a bug in flutter_markdown
-            children: [
-              WidgetSpan(
-                child: SizedBox(
-                  child: Wrap(
-                    spacing: 1.0,
-                    runSpacing: 5.0,
-                    direction: Axis.vertical,
-                    children: <Widget>[Math.tex(_content)],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+    return Wrap(
+      spacing: 1.0,
+      runSpacing: 5.0,
+      direction: Axis.vertical,
+      children: <Widget>[Math.tex(_content)],
     );
   }
 }

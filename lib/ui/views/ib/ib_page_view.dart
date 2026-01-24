@@ -144,11 +144,11 @@ class _IbPageViewState extends State<IbPageView> {
       selectable: _selectable,
     );
 
-    final _inlineBuilders = {
-      'sup': IbSuperscriptBuilder(selectable: _selectable),
-      'sub': IbSubscriptBuilder(selectable: _selectable),
-      'mathjax': IbMathjaxBuilder(),
-      'mark': HighlightBuilder(selectable: _selectable),
+    final _inlineBuilders = <String, MarkdownElementBuilder>{
+      // 'sup': IbSuperscriptBuilder(selectable: _selectable),
+      // 'sub': IbSubscriptBuilder(selectable: _selectable),
+      // 'mathjax': IbMathjaxBuilder(),
+      // 'mark': HighlightBuilder(selectable: _selectable),
     };
 
     return MarkdownBody(
@@ -168,12 +168,12 @@ class _IbPageViewState extends State<IbPageView> {
               AppLocalizations.of(context)!.ib_page_image_load_error,
           loadingImageText: AppLocalizations.of(context)!.ib_page_loading_image,
         ),
-        'h1': _headingsBuilder,
-        'h2': _headingsBuilder,
-        'h3': _headingsBuilder,
-        'h4': _headingsBuilder,
-        'h5': _headingsBuilder,
-        'h6': _headingsBuilder,
+        // 'h1': _headingsBuilder,
+        // 'h2': _headingsBuilder,
+        // 'h3': _headingsBuilder,
+        // 'h4': _headingsBuilder,
+        // 'h5': _headingsBuilder,
+        // 'h6': _headingsBuilder,
         'chapter_contents': IbChapterContentsBuilder(
           chapterContents:
               _model.pageData?.chapterOfContents?.isNotEmpty ?? false

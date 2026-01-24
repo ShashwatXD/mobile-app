@@ -100,7 +100,14 @@ class IbEngineServiceImpl implements IbEngineService {
 
     // Sort child pages
     if (parentPages.isNotEmpty) {
-      childPages.sort((a, b) => a.navOrder.compareTo(b.navOrder));
+      childPages.sort((a, b) {
+        final intA = int.tryParse(a.navOrder);
+        final intB = int.tryParse(b.navOrder);
+        if (intA != null && intB != null) {
+          return intA.compareTo(intB);
+        }
+        return a.navOrder.compareTo(b.navOrder);
+      });
     }
 
     return parentPages.isEmpty ? childPages : parentPages;
@@ -151,9 +158,14 @@ class IbEngineServiceImpl implements IbEngineService {
     }
 
     // Sort root pages
-    _chapters.sort(
-      (a, b) => int.parse(a.navOrder).compareTo(int.parse(b.navOrder)),
-    );
+    _chapters.sort((a, b) {
+      final intA = int.tryParse(a.navOrder);
+      final intB = int.tryParse(b.navOrder);
+      if (intA != null && intB != null) {
+        return intA.compareTo(intB);
+      }
+      return a.navOrder.compareTo(b.navOrder);
+    });
 
     // Build Navigation
     _chapters = _buildNav(_chapters);

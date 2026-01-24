@@ -35,11 +35,10 @@ class IbMdTagSyntax extends md.BlockSyntax {
       } while (parser.next != null || !parser.isDone);
 
       _tagsStack.remove('.quiz');
-      return md.Element.text('quiz', quizContent);
+      return md.Element('p', [md.Element.text('quiz', quizContent)]);
     }
 
     parser.advance();
-
     return null;
   }
 
